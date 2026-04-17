@@ -1,0 +1,315 @@
+:root {
+  --bg: #f1f5f9;
+  --text: #1e293b;
+  --muted: #94a3b8;
+  --card-border: rgba(226, 232, 240, 0.8);
+  --slate-200: #e2e8f0;
+  --slate-50: #f8fafc;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --indigo-600: #4f46e5;
+  --indigo-700: #4338ca;
+  --indigo-800: #3730a3;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    "Noto Sans",
+    "Liberation Sans",
+    sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.todo-app {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Layout */
+.todo-app__container {
+  max-width: 448px; /* max-w-md */
+  margin: 0 auto;
+  padding: 24px 16px; /* py-6 px-4 */
+}
+
+@media (min-width: 640px) {
+  .todo-app__container {
+    padding-top: 40px; /* sm:py-10 */
+    padding-bottom: 40px;
+  }
+}
+
+.todo-app__header {
+  margin-bottom: 24px; /* mb-6 */
+  text-align: center;
+}
+
+.todo-app__title {
+  margin: 0;
+  font-size: 24px; /* text-2xl */
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.todo-app__card {
+  background: #fff;
+  border: 1px solid var(--card-border);
+  border-radius: 16px; /* rounded-2xl */
+  padding: 16px; /* p-4 */
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* space-y-4 */
+}
+
+@media (min-width: 640px) {
+  .todo-app__card {
+    padding: 20px; /* sm:p-5 */
+  }
+}
+
+/* Form */
+.todo-app__form {
+  display: flex;
+  gap: 8px;
+}
+
+.todo-app__input {
+  flex: 1;
+  min-height: 44px; /* min-h-touch */
+  border-radius: 12px; /* rounded-xl */
+  border: 1px solid var(--slate-200);
+  padding: 10px 12px; /* px-3 py-2.5 */
+  font-size: 16px;
+  outline: none;
+  background: #fff;
+}
+
+.todo-app__input:focus {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25); /* focus:ring */
+  border-color: transparent;
+}
+
+.todo-app__add-btn {
+  min-height: 44px; /* min-h-touch */
+  min-width: 44px; /* min-w-touch */
+  flex: 0 0 auto;
+  border: none;
+  border-radius: 12px; /* rounded-xl */
+  background: var(--indigo-600);
+  color: #fff;
+  font-weight: 600;
+  padding: 0 16px; /* px-4 */
+  cursor: pointer;
+  transition:
+    transform 120ms ease,
+    background 120ms ease;
+}
+
+.todo-app__add-btn:hover {
+  background: var(--indigo-700);
+}
+
+.todo-app__add-btn:active {
+  background: var(--indigo-800);
+  transform: scale(0.98);
+}
+
+/* Filters */
+.todo-app__filters {
+  display: flex;
+  gap: 8px; /* gap-2 */
+}
+
+.todo-app__filter-btn {
+  flex: 1;
+  min-height: 44px;
+  border-radius: 12px; /* rounded-xl */
+  border: 1px solid var(--slate-200);
+  background: var(--slate-50);
+  color: var(--slate-700);
+  font-size: 14px; /* text-sm */
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+}
+
+.todo-app__filter-btn.is-active {
+  background: var(--indigo-600);
+  color: #fff;
+  border-color: var(--indigo-600);
+}
+
+/* Hint */
+.todo-app__storage-hint {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.todo-app__code {
+  color: var(--indigo-600);
+  background: #eef2ff; /* indigo-50 */
+  padding: 0 4px; /* px-1 */
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* List */
+.todo-app__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* space-y-2 */
+}
+
+.todo-app__empty-hint {
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+  padding: 24px 0; /* py-6 */
+}
+
+/* Todo item */
+.todo-item {
+  display: flex;
+  align-items: stretch;
+  gap: 8px; /* gap-2 */
+  border: 1px solid #f1f5f9; /* border-slate-100 */
+  background: rgba(248, 250, 252, 0.8); /* bg-slate-50/80 */
+  padding: 8px; /* p-2 */
+  border-radius: 12px; /* rounded-xl */
+  transition: box-shadow 120ms ease;
+}
+
+.todo-item.dragging {
+  opacity: 0.55;
+}
+
+.todo-item__grip {
+  cursor: grab;
+  user-select: none;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px; /* text-lg */
+  line-height: 1;
+  color: var(--muted); /* text-slate-400 */
+  flex-shrink: 0;
+}
+
+.todo-item__grip:hover {
+  color: var(--slate-600); /* hover:text-slate-600 */
+}
+
+.todo-item__grip:active {
+  cursor: grabbing;
+}
+
+.todo-item__checkbox-wrap {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.todo-item__checkbox {
+  width: 20px; /* w-5 */
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1; /* border-slate-300 */
+  accent-color: var(--indigo-600);
+}
+
+.todo-item__text {
+  flex: 1;
+  align-self: center;
+  word-break: break-word;
+  padding: 2px 0;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.todo-item__text.is-completed {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.todo-item__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* gap-1 */
+  flex-shrink: 0;
+}
+
+@media (min-width: 640px) {
+  .todo-item__actions {
+    flex-direction: row; /* sm:flex-row */
+  }
+}
+
+.todo-item__action-btn {
+  min-height: 44px;
+  min-width: 44px;
+  border-radius: 10px; /* rounded-lg */
+  border: 1px solid var(--slate-200);
+  background: #fff;
+  color: var(--slate-600);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 120ms ease,
+    transform 120ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todo-item__action-btn:hover {
+  background: var(--slate-50);
+}
+
+.todo-item__action-btn:active {
+  background: #eef2ff; /* indigo-50-ish */
+}
+
+/* Drag indicators */
+.drop-indicator-top {
+  box-shadow: inset 0 3px 0 0 #6366f1;
+}
+.drop-indicator-bottom {
+  box-shadow: inset 0 -3px 0 0 #6366f1;
+}

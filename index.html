@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>待办事项</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="todo-app">
+    <div class="todo-app__container">
+      <header class="todo-app__header">
+        <h1 class="todo-app__title">待办事项</h1>
+      </header>
+      <section class="todo-app__card">
+        <form id="todo-form" class="todo-app__form">
+          <input
+            id="todo-input"
+            type="text"
+            maxlength="200"
+            placeholder="添加新待办…"
+            class="todo-app__input"
+            autocomplete="off"
+          />
+          <button type="submit" class="todo-app__add-btn">添加</button>
+        </form>
+        <nav class="todo-app__filters" role="tablist" aria-label="筛选待办">
+          <a
+            href="#all"
+            data-filter="all"
+            class="filter-btn todo-app__filter-btn"
+            >全部</a
+          >
+          <a
+            href="#active"
+            data-filter="active"
+            class="filter-btn todo-app__filter-btn"
+            >未完成</a
+          >
+          <a
+            href="#completed"
+            data-filter="completed"
+            class="filter-btn todo-app__filter-btn"
+            >已完成</a
+          >
+        </nav>
+        <p id="storage-hint" class="todo-app__storage-hint">
+          数据保存在浏览器
+          <code class="todo-app__code">localStorage</code>
+          键名
+          <code class="todo-app__code">todos</code>
+        </p>
+        <ul id="todo-list" class="todo-app__list" aria-live="polite"></ul>
+        <p id="empty-hint" class="todo-app__empty-hint hidden">
+          暂无待办，输入后点击添加
+        </p>
+      </section>
+    </div>
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>
